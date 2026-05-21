@@ -18,7 +18,7 @@ export const LESSON_META: Record<string, LessonMeta> = {
   'metta':         { title: '자애경',           subtitle: '자애의 마음 수행',             source: 'Snp 1.8' },
   'sn22-59':       { title: '무아의 특징경',    subtitle: '오온과 무아',                  source: 'SN 22.59' },
   'ratana':        { title: '보배경',           subtitle: '삼보의 공덕과 가피',           source: 'Snp 2.1' },
-  'mn10':          { title: '마음챙김의 확립 경', subtitle: '사념처 수행법',             source: 'MN 10' },
+  'mn10':          { title: '마음챙김 확립의 큰 경', subtitle: '사념처 수행 — 전문(全文)', source: 'DN 22' },
 }
 
 export function getLessonTitle(lessonId: string): string {

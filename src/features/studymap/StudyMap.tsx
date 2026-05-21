@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const level = Number(localStorage.getItem('suttalog-level') || '0')
 
 const SKILLS = [
-  { id: 11, title: '마음챙김의 확립 경', desc: '사념처 수행법 🎯', icon: '🧘', route: '/learn/scripture/mn10', source: 'MN 10' },
+  { id: 11, title: '마음챙김 확립의 큰 경', desc: '사념처 전문(全文) 🎯', icon: '🧘', route: '/learn/scripture/mn10', source: 'DN 22' },
   { id: 10, title: '보배경', desc: '삼보의 공덕과 가피', icon: '💎', route: '/learn/scripture/ratana', source: 'Snp 2.1' },
   { id: 9, title: '무아의 특징경', desc: '오온과 무아', icon: '🔍', route: '/learn/scripture/sn22-59', source: 'SN 22.59' },
   { id: 8, title: '자애경', desc: '자애의 마음 수행', icon: '💛', route: '/learn/scripture/metta', source: 'Snp 1.8' },
