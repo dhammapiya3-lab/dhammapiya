@@ -1,91 +1,272 @@
-// 2과: 무아경(SN 22.59) 학습 데이터
+// 9과: 무아상경 (Anattalakkhaṇa Sutta, SN 22.59) — text/제9과. 무아상경.txt 전문 기반
 import type { StepType } from './lesson-data-sn56-11'
 
-const V1 = 'Ekaṃ samayaṃ bhagavā bārāṇasiyaṃ viharati isipatane migadāye.'
-const V1K = '한 때 세존께서 바라나시의 녹야원, 이시빠따나에 머무셨다.'
-const V2 = '"Rūpaṃ, bhikkhave, anattā."'
-const V2K = '"비구들이여, 물질(색)은 무아이다."'
-const V3 = 'Rūpañca hidaṃ, bhikkhave, attā abhavissa, nayidaṃ rūpaṃ ābādhāya saṃvatteyya.'
-const V3K = '비구들이여, 만약 물질이 자아라면, 물질이 병고로 이끌지 않을 것이다.'
-const V4 = '"Vedanā anattā. Saññā anattā. Saṅkhārā anattā. Viññāṇaṃ anattā."'
-const V4K = '"느낌도 무아, 인식도 무아, 의지작용도 무아, 의식도 무아이다."'
+const V1 = 'Evaṃ me sutaṃ. Ekaṃ samayaṃ bhagavā bārāṇasiyaṃ viharati isipatane migadāye.'
+const V1K = '이와 같이 나는 들었다. 한 때 세존께서 바라나시의 녹야원, 이시빠따나에 머무셨다.'
+
+const V2 = 'Tatra kho bhagavā pañcavaggiye bhikkhū āmantesi, "bhikkhavo"ti. "Bhadante"ti te bhikkhū bhagavato paccassosuṃ. Bhagavā etadavoca —'
+const V2K = '거기서 세존께서 다섯 비구에게 말씀하셨다 — "비구들이여." "존자시여" 하고 비구들이 응답하였다. 세존께서 이렇게 말씀하셨다 —'
+
+// 색 무아 논증
+const V3 = '"Rūpaṃ, bhikkhave, anattā. Rūpañca hidaṃ, bhikkhave, attā abhavissa, nayidaṃ rūpaṃ ābādhāya saṃvatteyya, labbhetha ca rūpe, \'evaṃ me rūpaṃ hotu, evaṃ me rūpaṃ mā ahosī\'ti."'
+const V3K = '"비구들이여, 물질(색)은 무아이다. 만약 물질이 자아라면, 물질이 병고로 이끌지 않을 것이고, 물질에 대해 \'나의 물질이 이러하기를, 이러하지 않기를\'이라고 통제할 수 있을 것이다."'
+
+const V4 = '"Yasmā ca kho, bhikkhave, rūpaṃ anattā, tasmā rūpaṃ ābādhāya saṃvattati, na ca labbhati rūpe \'evaṃ me rūpaṃ hotu, evaṃ me rūpaṃ mā ahosī\'ti."'
+const V4K = '"비구들이여, 물질은 무아이기 때문에 병고로 이끌고, 물질에 대해 \'이러하기를, 이러하지 않기를\'이라고 통제할 수 없다."'
+
+// 수·상·행·식 무아
+const V5 = '"Vedanā anattā... Saññā anattā... Saṅkhārā anattā... Viññāṇaṃ anattā."'
+const V5K = '"느낌도 무아. 인식도 무아. 형성도 무아. 의식도 무아." (각각 위와 동일 논증)'
+
+// 무상-고-무아 문답
+const V6 = '"Taṃ kiṃ maññatha, bhikkhave, rūpaṃ niccaṃ vā aniccaṃ vā"ti? "Aniccaṃ, bhante." "Yaṃ panāniccaṃ dukkhaṃ vā taṃ sukhaṃ vā"ti? "Dukkhaṃ, bhante." "Yaṃ panāniccaṃ dukkhaṃ vipariṇāmadhammaṃ, kallaṃ nu taṃ samanupassituṃ \'etaṃ mama, esohamasmi, eso me attā\'"ti? "No hetaṃ, bhante."'
+const V6K = '"비구들이여, 어떻게 생각하느냐? 물질은 영원한가, 무상한가?" "무상합니다, 세존이시여." "그러면 무상한 것은 괴로운 것인가, 즐거운 것인가?" "괴로운 것입니다." "그러면 무상하고 괴롭고 변하는 법인 것을 \'이것은 내 것이다, 이것은 나다, 이것이 나의 자아다\'라고 보는 것이 옳은가?" "그렇지 않습니다, 세존이시여."'
+
+// 결론 정형구
+const V7 = '"Tasmātiha, bhikkhave, yaṃ kiñci rūpaṃ atītānāgatapaccuppannaṃ ajjhattaṃ vā bahiddhā vā oḷārikaṃ vā sukhumaṃ vā hīnaṃ vā paṇītaṃ vā yaṃ dūre santike vā, sabbaṃ rūpaṃ \'netaṃ mama, nesohamasmi, na meso attā\'ti evametaṃ yathābhūtaṃ sammappaññāya daṭṭhabbaṃ."'
+const V7K = '"비구들이여, 그러므로 어떤 물질이든 — 과거·미래·현재의, 안의·밖의, 거친·미세한, 저열한·고귀한, 멀리·가까이의 — 모든 물질을 \'이것은 내 것이 아니다, 이것은 내가 아니다, 이것은 나의 자아가 아니다\'라고 이와 같이 있는 그대로 바른 지혜로 보아야 한다." (수·상·행·식 모두 동일)'
+
+// 깨달음·해탈
+const V8 = '"Evaṃ passaṃ, bhikkhave, sutavā ariyasāvako rūpasmimpi nibbindati, vedanāyapi nibbindati, saññāyapi nibbindati, saṅkhāresupi nibbindati, viññāṇasmimpi nibbindati. Nibbindaṃ virajjati, virāgā vimuccati. Vimuttasmiṃ vimuttamiti ñāṇaṃ hoti."'
+const V8K = '"비구들이여, 이와 같이 보는 잘 배운 성스러운 제자는 물질에 대해 염리하고, 느낌·인식·형성·의식에 대해서도 염리한다. 염리하면 탐욕이 사라지고, 탐욕이 사라지므로 해탈한다. 해탈했을 때 \'해탈하였다\'는 지혜가 생긴다."'
+
+const V9 = '"\'Khīṇā jāti, vusitaṃ brahmacariyaṃ, kataṃ karaṇīyaṃ, nāparaṃ itthattāyā\'ti pajānātī"ti.'
+const V9K = '"\'태어남은 다하였고, 청정 범행은 이루어졌고, 할 일은 끝났으며, 더 이상 이러한 상태로 되돌아오지 않는다\'고 분명히 안다."'
+
+const V10 = 'Idamavoca bhagavā. Attamanā pañcavaggiyā bhikkhū bhagavato bhāsitaṃ abhinanduṃ. Imasmiñca pana veyyākaraṇasmiṃ bhaññamāne pañcavaggiyānaṃ bhikkhūnaṃ anupādāya āsavehi cittāni vimucciṃsūti.'
+const V10K = '세존께서 이렇게 말씀하셨다. 다섯 비구는 흡족한 마음으로 세존의 말씀에 크게 기뻐하였다. 이 설명이 설해질 때 다섯 비구의 마음은 취착 없이 번뇌로부터 해탈하였다.'
 
 export const LESSON_SN22_59: StepType[] = [
-  { type: 'intro', icon: '🔍', title: '무아경', subtitle: 'Anattalakkhaṇa Sutta (SN 22.59)',
-    description: '붓다의 두 번째 설법.\n오온(五蘊)에 자아가 없음을 설하여\n다섯 비구가 아라한이 된 경전.\n\n전법륜경에서 배운 단어가 다시 나옵니다.' },
+  { type: 'intro', icon: '🔍', title: '무아상경 (Anattalakkhaṇa Sutta)', subtitle: 'SN 22.59 — 두 번째 설법',
+    description: '붓다의 두 번째 설법. 5온(五蘊)에 자아가 없음을 설하여 다섯 비구가 모두 아라한이 된 경.\n\n구조:\n① 5온 각각의 무아 논증 (통제 불가)\n② 무상→고→무아 3단계 문답 (5온 × 3)\n③ 결론 정형구 — "이것은 내 것 아님" (11측면)\n④ 염리(nibbidā) → 이탐(virāga) → 해탈(vimutti) → 해탈지(vimuttiñāṇa)\n⑤ 5비구 아라한과 성취' },
 
-  // ===== 1문장: 서두 (1과 복습) =====
-  { type: 'verse', pali: V1, pronKo: '에깡 사마양 바가와~ 바~라~나시양 위하라띠 이시빠따네 미가다~예.',
-    translation: V1K, highlight: ['ekaṃ','samayaṃ','bhagavā','viharati'],
-    note: '💡 1과에서 배운 정형구! 같은 장소, 같은 서두입니다.' },
+  // ===== 도입 =====
+  { type: 'teach', icon: '👂', word: 'Evaṃ me sutaṃ', pronKo: '에왕 메 수땅', meaning: '이와 같이 나는 들었다',
+    grammar: '부사+대명사 도구격+과거분사 주격', baseForm: 'evaṃ + me + suta',
+    formNote: '경전 도입 정형구. me(나에게/나로부터) + suta(들린)',
+    buddhism: '아난다 존자가 1차 결집에서 경을 암송할 때 도입.',
+    verseLine: V1, verseLineKo: V1K, audio: true },
+  { type: 'verse', pali: V1, pronKo: '에왕 메 수땅. 에깡 사마양 바가와~ 바~라~나시양 위하라띠 이시빠따네 미가다~예.',
+    translation: V1K, highlight: ['Evaṃ','me','sutaṃ','bārāṇasiyaṃ','isipatane','migadāye'],
+    note: '🏛️ 7과 sn56-11과 같은 장소 (바라나시 녹야원).' },
+  { type: 'verse', pali: V2, pronKo: '따뜨라 코 바가와~ 빤짜왁기예 빅쿠~ 아~만떼시...',
+    translation: V2K, note: '👥 7과와 같은 다섯 비구 대상.' },
 
-  // ===== 2문장: 핵심 — 색은 무아 =====
-  { type: 'teach', icon: '🎨', word: 'rūpaṃ', pronKo: '루~빵', meaning: '물질, 색(色)',
-    grammar: '중성명사, 주격 단수', baseForm: 'rūpa (물질, 형태)',
-    formNote: 'rūpa → rūpaṃ: 중성 -a 어간 주격 -ṃ\n1과에서 배운 dukkhaṃ과 같은 패턴!',
-    buddhism: '색(色). 오온(五蘊)의 첫째. 물질적 형태, 몸을 포함한 모든 물질.', verseLine: V2, verseLineKo: V2K, audio: true },
-
-  { type: 'teach', icon: '🚫', word: 'anattā', pronKo: '아낫따~', meaning: '무아, 자아가 아닌',
-    grammar: '형용사, 주격', baseForm: 'an(아닌) + attā(자아)',
-    formNote: 'an-(부정 접두사) + attā(자아) = 자아가 아닌\n💡 na(~않다)와 같은 부정이지만 합성어 형태',
-    buddhism: '무아(無我). 삼법인의 셋째. "어디에도 영원한 나는 없다". 불교의 가장 독특한 교리.',
-    verseLine: V2, verseLineKo: V2K, audio: true },
-
+  // ===== 색 무아 논증 =====
+  { type: 'intro', icon: '🎨', title: '— 색(色) 무아 논증 —', subtitle: '통제 불가 → 무아',
+    description: '논리: "자아라면 통제 가능. 색은 통제 불가 → 무아"' },
+  { type: 'teach', icon: '🎨', word: 'Rūpaṃ', pronKo: '루~빵', meaning: '물질, 색',
+    grammar: '중성명사, 주격', baseForm: 'rūpa',
+    buddhism: '색(色). 5온의 첫째. 11과 MN10 V_KHA의 rūpaṃ과 동일.',
+    verseLine: V3, verseLineKo: V3K, audio: true },
+  { type: 'teach', icon: '🚫', word: 'anattā', pronKo: '아낫따~', meaning: '무아, 자아 아님',
+    grammar: '형용사, 주격', baseForm: 'an + attā',
+    buddhism: '무아(無我). 삼법인의 셋째.',
+    verseLine: V3, verseLineKo: V3K, audio: true },
   { type: 'teach', icon: '👤', word: 'attā', pronKo: '앗따~', meaning: '자아, 나',
-    grammar: '남성명사, 주격', baseForm: 'attā (자아)',
-    formNote: '산스크리트 ātman(아뜨만)에 해당.\n힌두교에서는 영원한 실체, 붓다는 이를 부정.',
-    buddhism: '아(我). 영원한 자아. 우빠니샤드에서 말하는 "참나". 붓다는 이런 실체적 자아를 부정함.',
+    grammar: '남성명사, 주격', baseForm: 'attā',
+    formNote: '산스크리트 ātman(아뜨만)에 해당',
+    buddhism: '아(我). 우빠니샤드의 영원한 자아 — 부처님은 이를 부정.',
     verseLine: V3, verseLineKo: V3K, audio: true },
-
-  { type: 'quiz', question: '"rūpaṃ anattā"의 뜻은?', options: ['물질은 무아이다', '물질은 괴로움이다', '물질은 무상하다', '물질은 행복이다'], answer: 0 },
-
-  { type: 'verse', pali: V2, pronKo: '"루~빵, 빅카웨, 아낫따~."',
-    translation: V2K, highlight: ['rūpaṃ','anattā'],
-    note: '☸️ 불교의 핵심! "물질은 자아가 아니다"' },
-
-  // ===== 3문장: 논증 =====
-  { type: 'teach', icon: '🤒', word: 'ābādhāya', pronKo: '아~바~다~야', meaning: '병고를 위해, 고통으로',
-    grammar: '남성명사, 여격(4격)', baseForm: 'ābādha (병고, 고통)',
-    formNote: 'ābādha → ābādhāya: -a 어간 여격 -āya = "~을 위해"',
-    buddhism: '만약 몸이 "나"라면, 내가 원하는 대로 통제할 수 있어야 함. 그러나 병들고 늙는 것을 막을 수 없음 → 무아의 증거.',
+  { type: 'teach', icon: '🔄', word: 'abhavissa', pronKo: '아바윗사', meaning: '만약 ~이라면 (조건법)',
+    grammar: '동사 3인칭 단수 조건법', baseForm: 'bhavati 조건법',
+    formNote: '비실재 조건문 "만약 ~이라면 (실제로는 아니지만)"',
     verseLine: V3, verseLineKo: V3K, audio: true },
+  { type: 'teach', icon: '🤒', word: 'ābādhāya saṃvatteyya', pronKo: '아~바~다~야 상왓떼이야', meaning: '병고로 이끌 것이다 (가능법)',
+    grammar: '여격+동사 가능법', baseForm: 'ābādha + saṃvattati',
+    verseLine: V3, verseLineKo: V3K, audio: true },
+  { type: 'teach', icon: '🎮', word: 'labbhetha', pronKo: '랍베타', meaning: '얻을 수 있을 것이다 (가능법)',
+    grammar: '동사 3인칭 단수 가능법 수동', baseForm: 'labhati (얻다) 수동',
+    formNote: '"통제 가능할 것이다"의 의미',
+    verseLine: V3, verseLineKo: V3K, audio: true },
+  { type: 'teach', icon: '🙏', word: 'evaṃ me rūpaṃ hotu', pronKo: '에왕 메 루~빵 호뚜', meaning: '"나의 물질이 이러하기를"',
+    grammar: '부사+속격+주격+명령', baseForm: 'evaṃ + me + rūpa + bhavati',
+    verseLine: V3, verseLineKo: V3K, audio: true },
+  { type: 'teach', icon: '🚫', word: 'mā ahosī', pronKo: '마~ 아호시~', meaning: '"있지 말기를"',
+    grammar: '금지부사+동사 아오리스트', baseForm: 'mā + ahosi',
+    formNote: 'mā + 아오리스트 = 금지 명령',
+    verseLine: V3, verseLineKo: V3K, audio: true },
+  { type: 'verse', pali: V3, pronKo: '루~빵, 빅카웨, 아낫따~. 루~빤짜 히당, 빅카웨, 앗따~ 아바윗사, 나이당 루~빵 아~바~다~야 상왓떼이야, 랍베타 짜 루~뻬, "에왕 메 루~빵 호뚜, 에왕 메 루~빵 마~ 아호시~"띠.',
+    translation: V3K, highlight: ['Rūpaṃ','anattā','attā','abhavissa','ābādhāya','saṃvatteyya','labbhetha','mā','ahosī'],
+    note: '🎨 무아의 핵심 논증: 자아라면 병들지 않고 통제할 수 있어야 한다.' },
+  { type: 'teach', icon: '⚖️', word: 'yasmā... tasmā', pronKo: '야스마~... 따스마~', meaning: '~이므로 ... 그러므로',
+    grammar: '상관 부사', baseForm: 'yasmā + tasmā',
+    verseLine: V4, verseLineKo: V4K, audio: true },
+  { type: 'verse', pali: V4, pronKo: '야스마~ 짜 코, 빅카웨, 루~빵 아낫따~, 따스마~ 루~빵 아~바~다~야 상왓따띠, 나 짜 랍바띠 루~뻬...',
+    translation: V4K, highlight: ['yasmā','tasmā'], note: '⚖️ 무아이기 때문에 → 통제 불가.' },
 
-  { type: 'quiz', question: '무아(anattā)의 논증: "만약 물질이 자아라면..."', options: ['병들지 않을 것이다 (통제 가능)', '영원할 것이다', '행복할 것이다', '보이지 않을 것이다'], answer: 0, hint: '자아라면 통제 가능해야' },
+  // ===== 수상행식 무아 =====
+  { type: 'intro', icon: '5️⃣', title: '— 나머지 4온 무아 —', subtitle: 'vedanā·saññā·saṅkhārā·viññāṇa',
+    description: '느낌·인식·형성·의식 모두 같은 논증.' },
+  { type: 'teach', icon: '💭', word: 'Vedanā anattā', pronKo: '웨다나~ 아낫따~', meaning: '느낌은 무아',
+    grammar: '주격+형용사', baseForm: 'vedanā + anattā',
+    buddhism: '수(受). 5온 둘째.',
+    verseLine: V5, verseLineKo: V5K, audio: true },
+  { type: 'teach', icon: '🧠', word: 'Saññā anattā', pronKo: '산냐~ 아낫따~', meaning: '인식은 무아',
+    grammar: '주격+형용사', baseForm: 'saññā + anattā',
+    buddhism: '상(想). 5온 셋째.',
+    verseLine: V5, verseLineKo: V5K, audio: true },
+  { type: 'teach', icon: '⚙️', word: 'Saṅkhārā anattā', pronKo: '상카~라~ 아낫따~', meaning: '형성들은 무아',
+    grammar: '주격복수+형용사', baseForm: 'saṅkhāra + anattā',
+    formNote: 'saṅkhārā(복수형). abhavissaṃsu(복수 조건법), hontu(복수 명령), ahesuṃ(복수 아오리스트)로 변화',
+    buddhism: '행(行). 5온 넷째.',
+    verseLine: V5, verseLineKo: V5K, audio: true },
+  { type: 'teach', icon: '👁️‍🗨️', word: 'Viññāṇaṃ anattā', pronKo: '윈냐~낭 아낫따~', meaning: '의식은 무아',
+    grammar: '주격중성+형용사', baseForm: 'viññāṇa + anattā',
+    buddhism: '식(識). 5온 다섯째.',
+    verseLine: V5, verseLineKo: V5K, audio: true },
+  { type: 'verse', pali: V5, pronKo: '웨다나~ 아낫따~... 산냐~ 아낫따~... 상카~라~ 아낫따~... 윈냐~낭 아낫따~.',
+    translation: V5K, highlight: ['Vedanā','Saññā','Saṅkhārā','Viññāṇaṃ','anattā'],
+    note: '5️⃣ 5온 모두 무아 — 같은 논증 4회 반복.' },
 
-  // ===== 4문장: 오온 전체 =====
-  { type: 'teach', icon: '💭', word: 'vedanā', pronKo: '웨다나~', meaning: '느낌, 수(受)',
-    grammar: '여성명사, 주격', baseForm: 'vedanā (느낌)',
-    formNote: '√vid(알다)에서 유래. "경험하는 것"',
-    buddhism: '수(受). 오온 둘째. 쾌·불쾌·중립의 느낌. 감정이 아닌 기본 감수작용.', verseLine: V4, verseLineKo: V4K, audio: true },
+  // ===== 무상-고-무아 문답 =====
+  { type: 'intro', icon: '❓', title: '— 무상-고-무아 3단계 문답 —', subtitle: '5온 × 3 = 15회 문답',
+    description: '① 무상하냐? ② 무상은 고냐? ③ 무상·고·변하는 것을 "내 것·나·자아"로 봄이 옳냐?' },
+  { type: 'teach', icon: '🤔', word: 'taṃ kiṃ maññatha', pronKo: '땅 낑 만냐타', meaning: '어떻게 생각하느냐?',
+    grammar: '대명사+의문+동사 2인칭 복수', baseForm: 'taṃ + kiṃ + maññati',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '♾️', word: 'niccaṃ vā aniccaṃ vā', pronKo: '닛짱 와~ 아닛짱 와~', meaning: '영원한가 무상한가?',
+    grammar: '형용사 선택의문', baseForm: 'nicca + a + nicca',
+    formNote: 'nicca = 영원한 / a-nicca = 무상한',
+    buddhism: '무상(無常). 삼법인의 첫째.',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '🙏', word: 'Aniccaṃ bhante', pronKo: '아닛짱 반떼', meaning: '"무상합니다, 세존이시여"',
+    grammar: '형용사+호격', baseForm: 'aniccaṃ + bhante',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '😣', word: 'dukkhaṃ vā sukhaṃ vā', pronKo: '둑캉 와~ 수캉 와~', meaning: '괴로운가 즐거운가?',
+    grammar: '형용사 선택의문', baseForm: 'dukkha + sukha',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '🔄', word: 'vipariṇāmadhammaṃ', pronKo: '위빠리나~마담망', meaning: '변하는 법인',
+    grammar: '복합어, 대격', baseForm: 'vipariṇāma(변화) + dhamma',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '👀', word: 'samanupassituṃ', pronKo: '사마누빳시뚱', meaning: '바라보다 (부정사)',
+    grammar: '부정사', baseForm: 'samanupassati',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '🚫', word: 'etaṃ mama, esohamasmi, eso me attā', pronKo: '에땅 마마, 에소하마스미, 에소 메 앗따~', meaning: '"이것은 내 것, 이것은 나, 이것이 나의 자아"',
+    grammar: '3정형구', baseForm: 'etaṃ + mama / eso + ahaṃ + asmi / eso + me + attā',
+    formNote: '잘못된 동일시의 3정형구. 무아 부정의 표적.',
+    buddhism: '아견(我見)의 3측면 — 갈애·자만·견해.',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '✅', word: 'kallaṃ nu taṃ', pronKo: '깔랑 누 땅', meaning: '그것이 옳은가?',
+    grammar: '형용사+의문첨사+대명사', baseForm: 'kalla + nu + taṃ',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'teach', icon: '❌', word: 'No hetaṃ bhante', pronKo: '노 헤땅 반떼', meaning: '"그렇지 않습니다, 세존이시여"',
+    grammar: '부정+대명사+호격', baseForm: 'no + h\'etaṃ + bhante',
+    verseLine: V6, verseLineKo: V6K, audio: true },
+  { type: 'verse', pali: V6, pronKo: '땅 낑 만냐타, 빅카웨, 루~빵 닛짱 와~ 아닛짱 와~띠? 아닛짱, 반떼. 양 빠나~닛짱 둑캉 와~ 땅 수캉 와~띠? 둑캉, 반떼. 양 빠나~닛짱 둑캉 위빠리나~마담망, 깔랑 누 땅 사마누빳시뚱 — 에땅 마마, 에소하마스미, 에소 메 앗따~띠? 노 헤땅, 반떼.',
+    translation: V6K, highlight: ['niccaṃ','aniccaṃ','dukkhaṃ','sukhaṃ','vipariṇāmadhammaṃ','etaṃ mama','esohamasmi','eso me attā','No hetaṃ'],
+    note: '❓ 무상→고→무아 3단계 문답. 5온 모두 같은 패턴 (수·상·행·식 4회 반복).' },
 
-  { type: 'teach', icon: '🏷️', word: 'saññā', pronKo: '산냐~', meaning: '인식, 상(想)',
-    grammar: '여성명사, 주격', baseForm: 'saññā (인식)',
-    formNote: 'saṃ(함께) + √ñā(알다) = 구별하여 앎',
-    buddhism: '상(想). 오온 셋째. 대상을 인지하고 구별하는 작용. "이것은 빨강이다" 같은 인식.', verseLine: V4, verseLineKo: V4K, audio: true },
+  // ===== 결론 정형구 =====
+  { type: 'intro', icon: '🌐', title: '— 11측면 결론 —', subtitle: '"이것은 내 것 아님" 5온 각각',
+    description: '과거·미래·현재·안·밖·거친·미세·저열·고귀·먼·가까운 11측면 + 5온 = 55회 부정.' },
+  { type: 'teach', icon: '⏰', word: 'atītānāgatapaccuppannaṃ', pronKo: '아띠~따~나~가따빳쭙빤낭', meaning: '과거·미래·현재의',
+    grammar: '복합어, 대격', baseForm: 'atīta + anāgata + paccuppanna',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'teach', icon: '🏠', word: 'ajjhattaṃ vā bahiddhā vā', pronKo: '앗잣땅 와~ 바힛다~ 와~', meaning: '안의·밖의',
+    grammar: '부사 선택', baseForm: 'ajjhatta + bahiddhā',
+    formNote: '11과 MN10 후렴의 ajjhattaṃ/bahiddhā와 동일',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'teach', icon: '🪨', word: 'oḷārikaṃ vā sukhumaṃ vā', pronKo: '올라~리깡 와~ 수쿠망 와~', meaning: '거친·미세한',
+    grammar: '형용사 선택', baseForm: 'oḷārika + sukhuma',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'teach', icon: '⬇️', word: 'hīnaṃ vā paṇītaṃ vā', pronKo: '히~낭 와~ 빠니~땅 와~', meaning: '저열한·고귀한',
+    grammar: '형용사 선택', baseForm: 'hīna + paṇīta',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'teach', icon: '📏', word: 'dūre santike vā', pronKo: '두~레 산띠께 와~', meaning: '멀거나 가까운',
+    grammar: '부사', baseForm: 'dūra + santika',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'teach', icon: '🚫', word: 'netaṃ mama, nesohamasmi, na meso attā', pronKo: '네땅 마마, 네소하마스미, 나 메소 앗따~', meaning: '"이것은 내 것 아님, 나 아님, 나의 자아 아님"',
+    grammar: '3부정 정형구', baseForm: 'na+etaṃ + na+eso+ahaṃ + na+me+eso+attā',
+    formNote: '위의 잘못된 3정형구의 정확한 부정',
+    buddhism: '무아 통찰의 정형구. 갈애·자만·견해 3가지 부정.',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'teach', icon: '🔍', word: 'yathābhūtaṃ sammappaññāya daṭṭhabbaṃ', pronKo: '야타~부~땅 삼맙빤냐~야 닷탑방', meaning: '있는 그대로 바른 지혜로 보아야 한다',
+    grammar: '부사+도구격+미래분사', baseForm: 'yathābhūta + sammappaññā + daṭṭhabba',
+    formNote: '11과 MN10의 yathābhūtaṃ과 같은 표현',
+    verseLine: V7, verseLineKo: V7K, audio: true },
+  { type: 'verse', pali: V7, pronKo: '따스마~띠하, 빅카웨, 양 낀찌 루~빵 아띠~따~나~가따빳쭙빤낭 앗잣땅 와~ 바힛다~ 와~ 올라~리깡 와~ 수쿠망 와~ 히~낭 와~ 빠니~땅 와~ 양 두~레 산띠께 와~, 삽방 루~빵 — 네땅 마마, 네소하마스미, 나 메소 앗따~띠 에와메땅 야타~부~땅 삼맙빤냐~야 닷탑방.',
+    translation: V7K, highlight: ['atītānāgatapaccuppannaṃ','ajjhattaṃ','bahiddhā','oḷārikaṃ','sukhumaṃ','hīnaṃ','paṇītaṃ','dūre','santike','netaṃ mama','nesohamasmi','na meso attā','yathābhūtaṃ','sammappaññāya','daṭṭhabbaṃ'],
+    note: '🌐 11측면 × 5온 = 55회 부정. (느낌·인식·형성·의식 모두 같은 패턴)' },
 
-  { type: 'teach', icon: '⚡', word: 'saṅkhārā', pronKo: '상카~라~', meaning: '의지작용, 행(行)',
-    grammar: '남성명사, 주격 복수', baseForm: 'saṅkhāra (형성, 의지)',
-    formNote: 'saṃ(함께) + √kar(만들다) = 함께 만드는 것\n복수형 -ā (주격)',
-    buddhism: '행(行). 오온 넷째. 의도적 정신활동. 업(kamma)을 짓는 의지작용.', verseLine: V4, verseLineKo: V4K, audio: true },
+  // ===== 해탈 4단계 =====
+  { type: 'intro', icon: '🆓', title: '— 해탈 4단계 —', subtitle: '염리 → 이탐 → 해탈 → 해탈지',
+    description: 'nibbidā → virāga → vimutti → vimuttiñāṇa' },
+  { type: 'teach', icon: '👀', word: 'Evaṃ passaṃ', pronKo: '에왕 빳상', meaning: '이와 같이 보는',
+    grammar: '부사+현재분사', baseForm: 'evaṃ + passat',
+    verseLine: V8, verseLineKo: V8K, audio: true },
+  { type: 'teach', icon: '🎓', word: 'sutavā ariyasāvako', pronKo: '수따와~ 아리야사~와꼬', meaning: '잘 배운 성스러운 제자',
+    grammar: '형용사+복합어', baseForm: 'sutavant + ariya + sāvaka',
+    verseLine: V8, verseLineKo: V8K, audio: true },
+  { type: 'teach', icon: '😔', word: 'nibbindati', pronKo: '닙빈다띠', meaning: '염리한다, 싫어한다',
+    grammar: '동사 3인칭 단수', baseForm: 'nibbindati (nis- + √vid)',
+    formNote: 'nis(밖으로) + √vid(알다) = "환멸을 느끼다, 염리하다"',
+    buddhism: '염리(厭離). 해탈 첫 단계. 5온에 대한 싫증.',
+    verseLine: V8, verseLineKo: V8K, audio: true },
+  { type: 'teach', icon: '🌫️', word: 'virajjati', pronKo: '위랏자띠', meaning: '탐욕을 떠난다',
+    grammar: '동사 3인칭 단수', baseForm: 'virajjati (vi- + √raj)',
+    buddhism: '이탐(離貪). 해탈 둘째 단계. rāga(탐욕)에서 떠남.',
+    verseLine: V8, verseLineKo: V8K, audio: true },
+  { type: 'teach', icon: '🆓', word: 'virāgā vimuccati', pronKo: '위라~가~ 위뭇짜띠', meaning: '탐욕 사라짐으로 해탈한다',
+    grammar: '탈격+동사', baseForm: 'virāga + vimuccati',
+    buddhism: '해탈(解脫). 해탈 셋째 단계.',
+    verseLine: V8, verseLineKo: V8K, audio: true },
+  { type: 'teach', icon: '🏆', word: 'vimuttamiti ñāṇaṃ', pronKo: '위뭇따미띠 냐~낭', meaning: '"해탈하였다"는 지혜',
+    grammar: '대격+인용+주격', baseForm: 'vimutta + iti + ñāṇa',
+    buddhism: '해탈지(解脫智). 해탈 넷째 단계 = 아라한의 자증.',
+    verseLine: V8, verseLineKo: V8K, audio: true },
+  { type: 'verse', pali: V8, pronKo: '에왕 빳상, 빅카웨, 수따와~ 아리야사~와꼬 루~빠스밈삐 닙빈다띠, 웨다나~야삐 닙빈다띠, 산냐~야삐 닙빈다띠, 상카~레수삐 닙빈다띠, 윈냐~나스밈삐 닙빈다띠. 닙빈당 위랏자띠, 위라~가~ 위뭇짜띠. 위뭇따스밍 위뭇따미띠 냐~낭 호띠.',
+    translation: V8K, highlight: ['Evaṃ passaṃ','sutavā','ariyasāvako','nibbindati','virajjati','virāgā','vimuccati','vimuttamiti','ñāṇaṃ'],
+    note: '🆓 해탈 4단계 정형구. 위빠사나의 정점.' },
 
-  { type: 'teach', icon: '👁️', word: 'viññāṇaṃ', pronKo: '윈냐~낭', meaning: '의식, 식(識)',
-    grammar: '중성명사, 주격 단수', baseForm: 'viññāṇa (의식)',
-    formNote: 'vi(분별) + √ñā(알다) + ṇa = 분별하여 아는 것\n중성 주격 -ṃ',
-    buddhism: '식(識). 오온 다섯째. 대상을 아는 기본 인식작용. 눈의식, 귀의식 등 6가지.', verseLine: V4, verseLineKo: V4K, audio: true },
+  // ===== 아라한 자증 =====
+  { type: 'teach', icon: '🏁', word: 'khīṇā jāti', pronKo: '키~나~ 자~띠', meaning: '"태어남은 다하였다"',
+    grammar: '과거분사+주격', baseForm: 'khīṇa + jāti',
+    verseLine: V9, verseLineKo: V9K, audio: true },
+  { type: 'teach', icon: '✅', word: 'vusitaṃ brahmacariyaṃ', pronKo: '우시땅 브라흐마짜리양', meaning: '"청정 범행은 이루어졌다"',
+    grammar: '과거분사+주격', baseForm: 'vusita + brahmacariya',
+    verseLine: V9, verseLineKo: V9K, audio: true },
+  { type: 'teach', icon: '🎯', word: 'kataṃ karaṇīyaṃ', pronKo: '까땅 까라니~양', meaning: '"할 일은 끝났다"',
+    grammar: '과거분사+미래분사', baseForm: 'kata + karaṇīya',
+    verseLine: V9, verseLineKo: V9K, audio: true },
+  { type: 'teach', icon: '🚫', word: 'nāparaṃ itthattāya', pronKo: '나~빠랑 잇탓따~야', meaning: '"이러한 상태로 더 이상 (돌아가지 않는다)"',
+    grammar: '부정부사+여격', baseForm: 'na + aparaṃ + itthatta',
+    buddhism: '아라한의 4정형구 마지막. 윤회 종식 선언.',
+    verseLine: V9, verseLineKo: V9K, audio: true },
+  { type: 'verse', pali: V9, pronKo: '키~나~ 자~띠, 우시땅 브라흐마짜리양, 까땅 까라니~양, 나~빠랑 잇탓따~야~띠 빠자~나~띠~띠.',
+    translation: V9K, highlight: ['khīṇā','jāti','vusitaṃ','brahmacariyaṃ','kataṃ','karaṇīyaṃ','nāparaṃ','itthattāya'],
+    note: '🏆 아라한 자증 4정형구.' },
 
-  { type: 'verse', pali: V4, pronKo: '"웨다나~ 아낫따~. 산냐~ 아낫따~. 상카~라~ 아낫따~. 윈냐~낭 아낫따~."',
-    translation: V4K, highlight: ['vedanā','saññā','saṅkhārā','viññāṇaṃ','anattā'],
-    note: '☸️ 오온(五蘊) 모두 무아! 색(물질)·수(느낌)·상(인식)·행(의지)·식(의식)' },
+  // ===== 5비구 해탈 =====
+  { type: 'teach', icon: '🎉', word: 'anupādāya āsavehi cittāni vimucciṃsu', pronKo: '아누빠~다~야 아~사웨히 찟따~니 위뭇찡수', meaning: '취착 없이 번뇌로부터 마음들이 해탈하였다',
+    grammar: '절대분사+도구격+주격+동사 아오리스트', baseForm: 'an + upādāya + āsava + citta + vimuccati',
+    buddhism: '5비구의 아라한과 성취. 불교사 최초의 단체 아라한.',
+    verseLine: V10, verseLineKo: V10K, audio: true },
+  { type: 'verse', pali: V10, pronKo: '이다마오짜 바가와~. 앗따마나~ 빤짜왁기야~ 빅쿠~ 바가와또 바~시땅 아비난둥. 이마스민짜 빠나 웨이야~까라낫밍 반냐마~네 빤짜왁기야~낭 빅쿠~낭 아누빠~다~야 아~사웨히 찟따~니 위뭇찡수~띠.',
+    translation: V10K, highlight: ['Attamanā','abhinanduṃ','anupādāya','āsavehi','vimucciṃsu'],
+    note: '🎉 무아상경의 결말 — 5비구 모두 아라한과 성취.' },
 
-  { type: 'quiz', question: '오온(五蘊)의 순서는?', options: ['색·수·상·행·식', '색·행·수·식·상', '식·행·상·수·색', '수·색·상·식·행'], answer: 0 },
-  { type: 'quiz', question: '"saṅkhārā"의 뜻은?', options: ['느낌', '인식', '의지작용(행)', '의식'], answer: 2 },
-  { type: 'quiz', question: 'an-attā에서 an-은?', options: ['크다', '작다', '부정(~아닌)', '함께'], answer: 2, hint: 'na(~않다)의 합성어 형태' },
+  { type: 'verse', pali: 'Anattalakkhaṇasuttaṃ niṭṭhitaṃ.', pronKo: '아낫딸락카나숫땅 닛티땅.', translation: '— 무아상경 끝 —' },
 
-  { type: 'writing', instruction: '"무아"를 빠알리어로 써보세요', meaning: '무아 (자아가 아닌)', pronKo: '아낫따~', answer: 'anattā', hint: 'an+attā' },
+  // ===== 종합 퀴즈 =====
+  { type: 'quiz', question: '무아 논증의 핵심은?',
+    options: ['통제 불가 → 무아', '신이 만들었다', '무상은 자아다', '느낌만 자아다'], answer: 0 },
+  { type: 'quiz', question: '무상-고-무아 3단계 문답의 순서는?',
+    options: ['무상→고→"내 것 아님"', '고→무상→무아', '무아→고→무상', '무상→무아→고'], answer: 0 },
+  { type: 'quiz', question: '"netaṃ mama, nesohamasmi, na meso attā"의 의미는?',
+    options: ['"내 것 아님, 나 아님, 자아 아님"', '"이것이 나의 본질"', '"신만이 자아"', '"오온이 자아"'], answer: 0 },
+  { type: 'quiz', question: '해탈 4단계 순서는?',
+    options: ['nibbindati → virajjati → vimuccati → ñāṇaṃ', '깨달음 → 무명 → 갈애 → 윤회', '계 → 정 → 혜 → 해탈', '신·구·의·법'], answer: 0 },
+  { type: 'quiz', question: '아라한 자증 마지막 문구 "nāparaṃ itthattāya"의 뜻은?',
+    options: ['"이러한 상태로 더 이상 (돌아가지 않는다)"', '"이것이 시작이다"', '"신을 만났다"', '"한 번 더 태어난다"'], answer: 0 },
+  { type: 'quiz', question: '무아상경 결말에서 5비구는?',
+    options: ['모두 아라한 성취', '모두 떠나감', '모두 출가 포기', '모두 환생'], answer: 0 },
+
+  { type: 'writing', instruction: '"무아"를 빠알리어로 써보세요',
+    meaning: '무아 (자아가 아닌)', pronKo: '아낫따~', answer: 'anattā', hint: 'an+attā' },
 
   { type: 'speak', pali: 'Rūpaṃ anattā. Vedanā anattā. Saññā anattā. Saṅkhārā anattā. Viññāṇaṃ anattā.',
     pronKo: '루~빵 아낫따~. 웨다나~ 아낫따~. 산냐~ 아낫따~. 상카~라~ 아낫따~. 윈냐~낭 아낫따~.' },
-
-  // 종합
-  { type: 'quiz', question: '이 경전의 핵심 가르침은?', options: ['오온 어디에도 자아는 없다', '고행이 해탈의 길이다', '모든 것은 신이 만들었다', '자아를 강화해야 한다'], answer: 0 },
+  { type: 'speak', pali: 'netaṃ mama, nesohamasmi, na meso attā',
+    pronKo: '네땅 마마, 네소하마스미, 나 메소 앗따~' },
 ]
