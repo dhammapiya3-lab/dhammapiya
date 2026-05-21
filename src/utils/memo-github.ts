@@ -6,8 +6,8 @@
 
 import type { Memo } from './memo'
 
-const REPO_OWNER = 'ReachToWisdom'
-const REPO_NAME = 'SuttaLog'
+const REPO_OWNER = 'dhammapiya3-lab'
+const REPO_NAME = 'dhammapiya'
 const BRANCH = 'master'
 const MEMO_DIR = 'memos'
 

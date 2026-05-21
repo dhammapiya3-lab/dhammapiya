@@ -1,7 +1,7 @@
 {
   "name": "빠알리어 공부1",
   "short_name": "빠알리어 공부1",
-  "start_url": "/SuttaLog/",
+  "start_url": "/dhammapiya/",
   "display": "standalone",
   "background_color": "#FEFCF3",
   "theme_color": "#D4760A",
